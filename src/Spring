@@ -1,0 +1,23 @@
+In application properties
+if you see  hibernate.ddl.auto =org.hibernate.dialect.MySQL8Dialect
+
+this is for creating the schema  or drop the  schema  when  ever  we are running the  application
+
+JPa  is abstraction
+hibernate is the implementation
+
+both combinied  as ORm
+
+tables are represented as clases
+
+
+
+concurrency    hnadling
+payment  gateway & webhooks
+Transactions
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+concurreny problem
+
+
+U1 -9:05                      u2 9:05
+
+
+---------------------         -------------------|
+|  *   +   +    *   |         |  *   0   +    *  |
+|                   |         |                  |
+|  *   0   0    *   |         |  *   0   +    *  |
+|                   |         |                  |
+|  *   0   0    *   |         |  *   0   0    *  |
+|--------------------         |-------------------
+pressed book at 9:06           pressed  book at 9:07
+
+
+
+|-------------------------------------|
+|    ID      | SeatshowId | time      |
+|     1      |    Bk                  |
+|     2      |    L            9:06   |
+|     3      |    L            9:06   |
+|     4      |    Bk                  |
+|     5      |    Bk                  |
+|     6      |    A                   |
+|     7      |    A
+|     8      |    Bk
+|     9
+|     10
+|     11
+|     12
+|-------------------------------------
+
+user  1 locked  2 and  3  at  9;06  ummy ticket  return
+
+user  2  pressed at  3 and  6  at 9:07  retrieve  3 and 6  3 is not available
+all are not available  we would  throw  showseatNotAvaialble exception
+
+
+-->1  select    2   login    3  Pay
+--> login       2    select  3  pay
+
+
+
+select     pay        return fro pay( webhook call back)( redirect to webhook)
+<------------------------------------------------------------------------>
+
+
+
+Ideal workflow
+
+A--> select  --> Locked-->(login)Sent to payment gateway-->  Success--> Redirect to BMs
+                                                                         |
+                                                                         |
+                                                                      Success
+                                                                         |
+                                                                       Booked
+
+booked  --> truly not available
+
+Available  --> no one selected
+
+locked -->  ((now  - lockedAt)<  600 sec
+             ((now  - lockedAt)>  600 sec      considered as available
+
+
+2) refund  --> reconciliation
+
+bms                            PG
+|-----------------|  |------------------|
+| 1   600            | 1   600
+| 2   400            | 3   800
+| 3   800            | 2   400
+| 5   1000           | 4   1000
+                     | 5   1000
+
+ reconcile and  give t (refund) to the customer
+
+
+
+
